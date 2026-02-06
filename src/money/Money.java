@@ -8,7 +8,7 @@ public class Money {
     private final String currency = "PLN";
 
     public Money(BigDecimal amount) {
-        this.amount = amount.setScale(2, RoundingMode.HALF_UP);
+        this.amount = amount;
     }
 
     public static Money of(String s) {
@@ -28,6 +28,11 @@ public class Money {
     }
 
     public Money divide(BigDecimal other) {
-        return new Money(this.amount.divide(other));
+        return new Money(this.amount.divide(other, 2, RoundingMode.HALF_UP));
+    }
+
+    @Override
+    public String toString() {
+        return "Price " + amount + currency;
     }
 }
