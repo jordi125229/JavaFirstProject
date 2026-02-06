@@ -27,6 +27,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "user.User: " + displayName + "; " + email;
+        return "User: " + displayName + "; " + email;
     }
 }

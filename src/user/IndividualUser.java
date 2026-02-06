@@ -6,4 +6,8 @@ public class IndividualUser extends User {
         super(email, displayName);
     }
 
+    @Override
+    public String toString() {
+        return "IndividualUser: " + getDisplayName() + ", email: " + getEmail();
+    }
 }
