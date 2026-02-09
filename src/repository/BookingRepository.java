@@ -1,0 +1,18 @@
+package repository;
+
+import booking.Booking;
+import resources.Resource;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+
+public interface BookingRepository {
+    void add(Booking b);
+
+    Optional<Booking> findById(String id);
+
+    List<Booking> findAll();
+
+    List<Booking> findByResource (Resource r);
+}
