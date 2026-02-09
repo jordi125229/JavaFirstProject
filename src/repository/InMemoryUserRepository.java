@@ -2,12 +2,17 @@ package repository;
 
 import user.User;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class InMemoryUserRepository implements UserRepository {
     private List<User> users;
     private int userCount = 0;
+
+    public InMemoryUserRepository() {
+        this.users = new ArrayList<>();
+    }
 
     @Override
     public void add(User u) {

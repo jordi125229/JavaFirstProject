@@ -20,14 +20,11 @@ public class Device extends Resource {
 
     @Override
     protected Money baseRatePerHour() {
-        if (customHourlyRate != null) {
-            return customHourlyRate;
-        }
-        return baseRatePerHour();
+        return Money.of("10");
     }
 
     @Override
     public String describe() {
-        return name + "; " + quantity;
+        return getName() + "; " + quantity;
     }
 }

@@ -1,81 +1,4 @@
-Piotr_Jedraszczyk
-piotr_jedraszczyk
-Dostępny
 
-kacpiiiiiii — 01.02.2026 13:55
-z tym
-Piotr_Jedraszczyk — 01.02.2026 14:00
-patrze ale nie rozumiem co moglo tu nie pojsc
-bo widze ze tego pr nie ma
-ale normalnie wgrane to jest to zadanie
-kacpiiiiiii — 01.02.2026 14:02
-w sumie chyba wszystko oke jest
-tylko nie zrbiles PR
-bo wrzucony jest branch spoko
-https://github.com/jordi125229/Java_tasks/compare/master...Task5/BigDecimal
-GitHub
-Comparing master...Task5/BigDecimal · jordi125229/Java_tasks
-Contribute to jordi125229/Java_tasks development by creating an account on GitHub.
-Contribute to jordi125229/Java_tasks development by creating an account on GitHub.
-ja mam opcje zrobienia PR u ciebie
-mozesz zekrnac i zatwierdzic jak jest git wszystko
-Piotr_Jedraszczyk — 01.02.2026 14:04
-dobra git
-juz jest
-Oliwier Zyskowski — 01.02.2026 14:31
-o kurde to poklikalem resolve
-przy komentarzach twoich
-da sie to jakos cofnąć?
-Piotr_Jedraszczyk — 01.02.2026 14:32
-ja tez tak zrobilem
-co prawda tylko pierwsze zadanie poprawilem narazie
-kacpiiiiiii — 01.02.2026 14:32
-mozecie zerknac na necie ale raczej nie ma sensu tego cofac juz teraz jak pomergowane, po porstu pamietajcie na przyszlosc
-Piotr_Jedraszczyk — 01.02.2026 14:32
-ok
-kacpiiiiiii — 02.02.2026 16:39
-> **Model czasu (domyślny):** Implementujemy własną klasę `FFDateTime` (pola `int`: `year`, `month`, `day`, `hour`, `minute`).
-> **Opcjonalnie:** zamiast `FFDateTime` można użyć `java.time.LocalDateTime`. Wtedy proszę w krótkim komentarzu opisać różnice (walidacja, arytmetyka, czytelność).
-
----
-
-## 1) Fabuła (kontekst)
-
-message (2).txt
-20 KB
-Oliwier Zyskowski — 03.02.2026 17:20
-https://github.com/oliq04/homeworks/pull/5
-Piotr_Jedraszczyk — 03.02.2026 18:53
-https://github.com/jordi125229/Java_tasks/pull/5
-GitHub
-Enum by jordi125229 · Pull Request #5 · jordi125229/Java_tasks
-Enum by jordi125229 · Pull Request #5 · jordi125229/Java_tasks
-Oliwier Zyskowski — 03.02.2026 20:14
-@kacpiiiiiii możesz zerknąć znowu na code review bo poprawiłem tam co pisałeś, ale nie wiem czy czegoś nie przeoczyłem bo pare resolvow zrobilem niechcacy
-kacpiiiiiii — 03.02.2026 20:15
-Będę zerkać w weekend pewnie, jak co to Ci napiszę
-Piotr_Jedraszczyk — Wczoraj o 20:04
-Pierwszy pull request:
-https://github.com/jordi125229/FirstApp/pull/1
-GitHub
-task2 by jordi125229 · Pull Request #1 · jordi125229/FirstApp
-task2 by jordi125229 · Pull Request #1 · jordi125229/FirstApp
-Drugi:  https://github.com/jordi125229/FirstApp/pull/2
-GitHub
-Pr3 by jordi125229 · Pull Request #2 · jordi125229/FirstApp
-Trzeci: https://github.com/jordi125229/FirstApp/pull/3
-GitHub
-task4 by jordi125229 · Pull Request #3 · jordi125229/FirstApp
-task4 by jordi125229 · Pull Request #3 · jordi125229/FirstApp
-Oliwier Zyskowski — Wczoraj o 21:10
-Pierwszy pull request + dodałem cie jako collaboratora: https://github.com/oliq04/ffWork-project/pull/1
-Piotr_Jedraszczyk — 14:26
-Utworzylem nowe repo i wrzucilem PR z zadaniami 3.1-3.4 uwzgledniajac twoje poprawki https://github.com/jordi125229/JavaFirstProject/pulls
-GitHub
-Pull requests · jordi125229/JavaFirstProject
-Contribute to jordi125229/JavaFirstProject development by creating an account on GitHub.
-Pull requests · jordi125229/JavaFirstProject
-﻿
 > **Model czasu (domyślny):** Implementujemy własną klasę `FFDateTime` (pola `int`: `year`, `month`, `day`, `hour`, `minute`).
 > **Opcjonalnie:** zamiast `FFDateTime` można użyć `java.time.LocalDateTime`. Wtedy proszę w krótkim komentarzu opisać różnice (walidacja, arytmetyka, czytelność).
 
@@ -393,9 +316,9 @@ Prosty wzorzec repozytorium (w pamięci). Można użyć Tablic [], `List`, `Map`
 
 ### Użytkownicy
 
-- `ADD_USER INDIVIDUAL <email> <fullName>`
-- `ADD_USER COMPANY <email> <companyName> <nip>`
-- `LIST_USERS`
+- `ADD_USER INDIVIDUAL <email> <fullName>`ok
+- `ADD_USER COMPANY <email> <companyName> <nip>` ok
+- `LIST_USERS` ok
 
 ### Zasoby
 
@@ -411,7 +334,7 @@ Prosty wzorzec repozytorium (w pamięci). Można użyć Tablic [], `List`, `Map`
 - `BOOK <userEmail> <resourceName> <startIso> <durationMinutes>`
 - `CONFIRM <bookingId>`
 - `CANCEL <bookingId>`
-- `LIST_BOOKINGS`
+- `LIST_BOOKINGS` ok
   > ⭐ **Opcjonalnie:** `LIST_BOOKINGS [USER=<email>] [RESOURCE=<name>] [STATUS=<PENDING|CONFIRMED|CANCELLED|COMPLETED>]`
 
 ### Polityki cen

@@ -2,7 +2,7 @@ package payment;
 
 import money.Money;
 
-class CardPayment extends Payment {
+public class CardPayment extends Payment {
     private String last4;
 
     public CardPayment(Money amount, String paymentId, PaymentStatus status, String last4) {
@@ -11,9 +11,7 @@ class CardPayment extends Payment {
     }
 
     @Override
-    void capture() {
-        if (getStatus() == PaymentStatus.INITIATED){
-            setStatus(PaymentStatus.CAPTURED);
-        }
+    public void capture() {
+        setStatus(PaymentStatus.CAPTURED);
     }
 }

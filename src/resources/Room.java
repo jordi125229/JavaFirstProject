@@ -32,14 +32,11 @@ public class Room extends Resource {
 
     @Override
     protected Money baseRatePerHour() {
-        if (customHourlyRate != null) {
-            return customHourlyRate;
-        }
-        return baseRatePerHour();
+        return Money.of("30");
     }
 
     @Override
     public String describe() {
-        return name + "; " + seats + "; equipment: " + equipment;
+        return getName() + "; " + seats + "; equipment: " + equipment;
     }
 }

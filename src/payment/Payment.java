@@ -7,13 +7,13 @@ public abstract class Payment {
     private String paymentId;
     private PaymentStatus status;
 
-    abstract void capture();
-
     public Payment(Money amount, String paymentId, PaymentStatus status) {
         this.amount = amount;
         this.paymentId = paymentId;
         this.status = status;
     }
+
+    public abstract void capture();
 
     public Money getAmount() {
         return amount;

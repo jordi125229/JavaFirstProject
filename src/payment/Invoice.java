@@ -12,14 +12,6 @@ public class Invoice {
     private Money total;
     private String itemDescription;
 
-    public Invoice(String invoiceNumber, LocalDateTime issueDate, User buyer, Money total, String itemDescription) {
-        this.invoiceNumber = invoiceNumber;
-        this.issueDate = issueDate;
-        this.buyer = buyer;
-        this.total = total;
-        this.itemDescription = itemDescription;
-    }
-
     public String getInvoiceNumber() {
         return invoiceNumber;
     }
@@ -62,12 +54,10 @@ public class Invoice {
 
     @Override
     public String toString() {
-        return "Invoice{" +
-                "invoiceNumber='" + invoiceNumber + '\'' +
-                ", issueDate=" + issueDate +
-                ", buyer=" + buyer +
-                ", total=" + total +
-                ", itemDescription='" + itemDescription + '\'' +
-                '}';
+        return "Invoice: " +
+                "invoiceNumber: " + invoiceNumber + " issueDate: " + issueDate +
+                ", buyer " + buyer +
+                ", total " + total +
+                ", itemDescription: " + itemDescription;
     }
 }

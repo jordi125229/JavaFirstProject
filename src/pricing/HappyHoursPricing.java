@@ -10,8 +10,8 @@ public class HappyHoursPricing implements PricingPolicy {
     @Override
     public Money price(Booking booking) {
         Money hourlyRate = booking.getResource().hourlyRate();
-        Money pricePerHour = hourlyRate.divide(BigDecimal.valueOf(60))
+        Money pricePerMinute = hourlyRate.divide(BigDecimal.valueOf(60))
                 .multiply(new BigDecimal("0.7"));
-        return pricePerHour.multiply(new BigDecimal(booking.durationMinutes()));
+        return pricePerMinute.multiply(new BigDecimal(booking.durationMinutes()));
     }
 }
