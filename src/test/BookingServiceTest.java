@@ -32,29 +32,29 @@ class BookingServiceTest {
         userRepo.add(user2);
         resourceRepo.add(desk);
         resourceRepo.add(desk1);
-        BookingService bookingService = new BookingService(userRepo, resourceRepo, bookingRepo, pricingPolicy);
-
-        Booking book = bookingService.book(user1, desk, LocalDateTime.of(2026,1,4,16,30),
-                LocalDateTime.of(2026,1,4,16,30).plusHours(2));
-        Booking book2 = bookingService.book(user2, desk, LocalDateTime.of(2026,1,4,15,30),
-                LocalDateTime.of(2026,1,4,14,30).plusHours(2));
-
-        System.out.println(book);
-        bookingService.cancel(book);
+//        BookingService bookingService = new BookingService();
+//
+//        Booking book = bookingService.book(user1, desk, LocalDateTime.of(2026,1,4,16,30),
+//                LocalDateTime.of(2026,1,4,16,30).plusHours(2));
+//        Booking book2 = bookingService.book(user2, desk, LocalDateTime.of(2026,1,4,15,30),
+//                LocalDateTime.of(2026,1,4,14,30).plusHours(2));
+//
 //        System.out.println(book);
-//        bookingService.calculatePrice(book);
-        System.out.println(book);
-
-        System.out.println(book2);
-
-        List<Booking> bookings = bookingService.bookings();
-        System.out.println(bookings);
+//        bookingService.cancel(book);
+////        System.out.println(book);
+////        bookingService.calculatePrice(book);
+//        System.out.println(book);
+//
+//        System.out.println(book2);
+//
+//        List<Booking> bookings = bookingService.bookings();
+//        System.out.println(bookings);
 
 //        List<Booking> all = bookingRepo.findAll();
 //        System.out.println(all);
-
-        BillingService bs = new BillingService();
-        Invoice invoice = bs.toInvoice(book);
-        System.out.println(invoice);
+//
+//        BillingService bs = new BillingService();
+//        Invoice invoice = bs.toInvoice(book);
+//        System.out.println(invoice);
     }
 }

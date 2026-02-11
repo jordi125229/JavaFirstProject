@@ -121,7 +121,7 @@ Zadaniem jest zaprojektowanie obiektowego modelu oraz prostego CLI (REPL), któr
 
 - **Metody abstrakcyjne:**
     - `protected abstract Money baseRatePerHour();`
-    - `public abstract String describe();` — krótki opis do listowania.
+    - `public abstract String describe();` — krótki opis do listowania. -> moge dodac dodatkowe informacje
 
 - **Metody konkretne:**
     - `public Money hourlyRate()` — jeśli `customHourlyRate != null` → zwróć ją; inaczej `baseRatePerHour()`.
@@ -322,15 +322,15 @@ Prosty wzorzec repozytorium (w pamięci). Można użyć Tablic [], `List`, `Map`
 
 ### Zasoby
 
-- `ADD_ROOM <name> <seats> <hourlyRate>`
-- `ADD_DESK <name> <hot|fixed> <hourlyRate>`
-- `ADD_DEVICE <name> <quantity> <hourlyRate>`
-- `LIST_RESOURCES`
+- `ADD_ROOM <name> <seats> <hourlyRate>` ok
+- `ADD_DESK <name> <hot|fixed> <hourlyRate>` ok
+- `ADD_DEVICE <name> <quantity> <hourlyRate>` ok
+- `LIST_RESOURCES` ok
   > ⭐ **Opcjonalnie:** `LIST_RESOURCES [TYPE=<ROOM|DESK|DEVICE>]`
 
 ### Rezerwacje
 
-- `BOOK <userEmail> <resourceName> <startIso> <endIso>`
+- `BOOK <userEmail> <resourceName> <startIso> <endIso>`ok
 - `BOOK <userEmail> <resourceName> <startIso> <durationMinutes>`
 - `CONFIRM <bookingId>`
 - `CANCEL <bookingId>`

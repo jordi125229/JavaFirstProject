@@ -39,4 +39,9 @@ public class Room extends Resource {
     public String describe() {
         return getName() + "; " + seats + "; equipment: " + equipment;
     }
+
+    @Override
+    public String toString() {
+        return getName() + "; " + hourlyRate() + "; " + seats + "; " + equipment;
+    }
 }

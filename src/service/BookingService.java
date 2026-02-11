@@ -7,10 +7,7 @@ import payment.PaymentStatus;
 import pricing.HappyHoursPricing;
 import pricing.PricingPolicy;
 import pricing.StandardPricing;
-import repository.BookingRepository;
-import repository.InMemoryResourceRepository;
-import repository.ResourceRepository;
-import repository.UserRepository;
+import repository.*;
 import resources.Device;
 import resources.Resource;
 import user.User;
@@ -29,7 +26,10 @@ public class BookingService {
     BookingRepository bookingRepository;
     PricingPolicy pricingPolicy;
 
-    public BookingService(UserRepository userRepository, ResourceRepository resourceRepository, BookingRepository bookingRepository, PricingPolicy pricingPolicy) {
+    public BookingService(UserRepository userRepository,
+                          ResourceRepository resourceRepository,
+                          BookingRepository bookingRepository,
+                          PricingPolicy pricingPolicy) {
         this.userRepository = userRepository;
         this.resourceRepository = resourceRepository;
         this.bookingRepository = bookingRepository;
@@ -37,22 +37,20 @@ public class BookingService {
     }
 
     public Booking book(User u, Resource r, LocalDateTime s, LocalDateTime e) {
-        Optional<User> byEmail = userRepository.findByEmail(u.getEmail());
-        Optional<Resource> byName = resourceRepository.findByName(r.getName());
-        if (byEmail.isEmpty() || byName.isEmpty() || s.isAfter(e)) {
-            return null;
-        }
         if (!validation(r, s, e)) {
             throw new IllegalArgumentException("Resource isn't available in this time");
         }
-        Booking b = new Booking(byEmail.get(), byName.get(), s, e);
+        Booking b = new Booking(u, r, s, e);
         String date = s.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         Money price = getPricingPolicy(b);
         b.setCalculatedPrice(price);
         b.setId("BK-<" + date + counterCreation() + ">");
         b.setStatus(BookingStatus.PENDING);
-        bookingRepository.add(b);
         return b;
+    }
+
+    Booking book(User u, Resource r, LocalDateTime start, int durationTime) {
+        return book(u, r, start, start.plusMinutes(durationTime));
     }
 
     private Money getPricingPolicy(Booking b) {
@@ -77,10 +75,6 @@ public class BookingService {
                         s.isBefore(b.getEnd()) &&
                                 e.isAfter(b.getStart())
                 );
-    }
-
-    Booking book(User u, Resource r, LocalDateTime start, int durationTime) {
-        return book(u, r, start, start.plusMinutes(durationTime));
     }
 
     public void confirm(Booking b) {

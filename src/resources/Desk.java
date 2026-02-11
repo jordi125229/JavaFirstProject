@@ -25,6 +25,11 @@ public class Desk extends Resource {
 
     @Override
     public String describe() {
-        return getName() + "; " + type + "; " + getCustomHourlyRate();
+        return getName() + "; " + type + "; " + getCustomHourlyRate();  //po co ten kod ?
+    }
+
+    @Override
+    public String toString() {
+        return getName() + "; " + type + "; " + hourlyRate();
     }
 }
