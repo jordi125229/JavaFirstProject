@@ -11,8 +11,11 @@ public enum Options {
     BOOK(8, "Book"),
     CONFIRM(9, "Confirmation"),
     CANCEL(10, "Cancelation"),
-    LIST_BOOKINGS(11, "List of bookings"),
-    EXIT(12, "Closing app");
+    COMPLETE(11, "Booking complete"),
+    LIST_BOOKINGS(12, "List of bookings"),
+    INVOICE(13, "Invoice creating"),
+    PAY(14, "Invoice paying"),
+    EXIT(15, "Closing app");
 
     private final int optionNumber;
     private final String description;
@@ -20,14 +23,6 @@ public enum Options {
     Options(int optionNumber, String description) {
         this.optionNumber = optionNumber;
         this.description = description;
-    }
-
-    public int getOptionNumber() {
-        return optionNumber;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public static Options fromNumber(int number){

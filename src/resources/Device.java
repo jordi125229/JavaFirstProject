@@ -3,11 +3,11 @@ package resources;
 import money.Money;
 
 public class Device extends Resource {
-    private int quantity;
+    private int quantity = 0;
 
-    public Device(String name, Money customHourlyRate, int quantity) {
+    public Device(String name, Money customHourlyRate) {
         super(name, customHourlyRate);
-        this.quantity = quantity;
+        quantity++;
     }
 
     public int getQuantity() {

@@ -2,6 +2,7 @@ package cli;
 
 import booking.Booking;
 import money.Money;
+import payment.CardPayment;
 import repository.InMemoryBookingRepository;
 import repository.InMemoryResourceRepository;
 import repository.InMemoryUserRepository;
@@ -21,6 +22,7 @@ public class DataReader {
     private ConsolePrinter consolePrinter;
     private BookingService bookingService;
     private Scanner sc;
+    private CardPayment cardPayment;
 
     public DataReader() {
         this.consolePrinter = new ConsolePrinter();
@@ -77,6 +79,7 @@ public class DataReader {
         Money customRate = getMoney();
         System.out.println("Insert seat's count: ");
         int seatsCount = sc.nextInt();
+        sc.nextLine();
         System.out.println("Insert equipment of room: ");
         String s = sc.nextLine();
         return new Room(name, customRate, seatsCount, Set.of(s));
@@ -86,9 +89,7 @@ public class DataReader {
         System.out.println("Insert device's name:");
         String name = sc.nextLine();
         Money customRate = getMoney();
-        System.out.println("Insert quantity of devices: ");
-        int quantity = sc.nextInt();
-        return new Device(name, customRate, quantity);
+        return new Device(name, customRate);
     }
 
     private Money getMoney() {
@@ -125,5 +126,11 @@ public class DataReader {
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         String input = sc.nextLine();
         return LocalDateTime.parse(input, formatter);
+    }
+
+    public String bookingFinder(){
+        System.out.println("Insert booking's id: ");
+        String s = sc.nextLine();
+        return s;
     }
 }

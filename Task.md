@@ -332,21 +332,21 @@ Prosty wzorzec repozytorium (w pamięci). Można użyć Tablic [], `List`, `Map`
 
 - `BOOK <userEmail> <resourceName> <startIso> <endIso>`ok
 - `BOOK <userEmail> <resourceName> <startIso> <durationMinutes>`
-- `CONFIRM <bookingId>`
-- `CANCEL <bookingId>`
+- `CONFIRM <bookingId>`ok
+- `CANCEL <bookingId>`ok
 - `LIST_BOOKINGS` ok
   > ⭐ **Opcjonalnie:** `LIST_BOOKINGS [USER=<email>] [RESOURCE=<name>] [STATUS=<PENDING|CONFIRMED|CANCELLED|COMPLETED>]`
 
 ### Polityki cen
 
-- `SET_PRICING STANDARD|HAPPY_HOURS`
+- `SET_PRICING STANDARD|HAPPY_HOURS` ok
 
 > ⭐ **Zniżki (SET_DISCOUNT ...) są w całości opcjonalne – patrz sekcja rozszerzeń.**
 
 ### Płatności / faktury
 
 - `PAY <bookingId> CARD <last4>`
-- `INVOICE <bookingId>`
+- `INVOICE <bookingId>` ok
 
 > ⭐ **Opcjonalne:** `PAY <bookingId> WALLET` (jeśli implementujecie `WalletPayment`).
 
@@ -411,28 +411,28 @@ Prosty wzorzec repozytorium (w pamięci). Można użyć Tablic [], `List`, `Map`
 ### Testy **podstawowe (must pass)**
 
 **Test 0 — Dane startowe**
-- `ADD_ROOM "Sala Alfa" 12 80`
-- `ADD_DESK "Hot-1" hot 25`
-- `ADD_DEVICE "Projektor-1" 2 40`
-- `ADD_USER INDIVIDUAL anna@ex.com "Anna Nowak"`
-- `ADD_USER COMPANY biuro@acme.pl "ACME Sp. z o.o." 5211234567`
-- `SET_PRICING STANDARD`
-- **Spodziewane:** `LIST_RESOURCES`, `LIST_USERS` zwracają powyższe pozycje.
+- `ADD_ROOM "Sala Alfa" 12 80` ok 
+- `ADD_DESK "Hot-1" hot 25` ok 
+- `ADD_DEVICE "Projektor-1" 2 40` ok 
+- `ADD_USER INDIVIDUAL anna@ex.com "Anna Nowak"` ok 
+- `ADD_USER COMPANY biuro@acme.pl "ACME Sp. z o.o." 5211234567` ok
+- `SET_PRICING STANDARD` ok
+- **Spodziewane:** `LIST_RESOURCES`, `LIST_USERS` zwracają powyższe pozycje. ok
 
 **Test 1 — Rezerwacja i płatność (overloading)**
-- `BOOK biuro@acme.pl "Sala Alfa" 2025-09-15T10:00 2025-09-15T12:00` → `PENDING`, cena `160.00 PLN`.
-- `CONFIRM <id>` → `CONFIRMED`.
+- `BOOK biuro@acme.pl "Sala Alfa" 2025-09-15T10:00 2025-09-15T12:00` → `PENDING`, cena `160.00 PLN`. ok
+- `CONFIRM <id>` → `CONFIRMED`. ok
 - `PAY <id> CARD 4242` → `Payment captured method=CARD last4=4242` (lub podobny komunikat).
-- `INVOICE <id>` → `Invoice total=160.00 PLN buyer=ACME Sp. z o.o.`.
-- `BOOK biuro@acme.pl "Sala Alfa" 2025-09-16T09:00 90` → `120.00 PLN`.
+- `INVOICE <id>` → `Invoice total=160.00 PLN buyer=ACME Sp. z o.o.`. ok
+- `BOOK biuro@acme.pl "Sala Alfa" 2025-09-16T09:00 90` → `120.00 PLN`. ok
 
 **Test 2 — Kolizje**
-- Mając `CONFIRMED` `10:00–12:00`, próba `11:00–13:00` → `ERROR: resource not available`.
-- Równoległa rezerwacja innego zasobu — przechodzi.
+- Mając `CONFIRMED` `10:00–12:00`, próba `11:00–13:00` → `ERROR: resource not available`. ok
+- Równoległa rezerwacja innego zasobu — przechodzi. ok
 
 **Test 3 — Happy Hours**
-- `SET_PRICING HAPPY_HOURS`
-- `BOOK anna@ex.com "Hot-1" 2025-09-17T14:00 2025-09-17T16:00` → około `35.00 PLN` (–30% od `50.00`).
+- `SET_PRICING HAPPY_HOURS` ok
+- `BOOK anna@ex.com "Hot-1" 2025-09-17T14:00 2025-09-17T16:00` → około `35.00 PLN` (–30% od `50.00`). ok
 
 **Test 6 — Ilość urządzeń**
 - Dwie rezerwacje `Projektor-1` w tym samym czasie przy `quantity=2` — przechodzą; trzecia → błąd.

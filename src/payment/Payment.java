@@ -7,11 +7,11 @@ public abstract class Payment {
     private String paymentId;
     private PaymentStatus status;
 
-    public Payment(Money amount, String paymentId, PaymentStatus status) {
-        this.amount = amount;
-        this.paymentId = paymentId;
-        this.status = status;
-    }
+//    public Payment(Money amount, String paymentId, PaymentStatus status) {
+//        this.amount = amount;
+//        this.paymentId = paymentId;
+//        this.status = status;
+//    }
 
     public abstract void capture();
 
@@ -37,5 +37,10 @@ public abstract class Payment {
 
     public void setStatus(PaymentStatus status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Payment: " + amount + "; " + paymentId + "; " + status;
     }
 }

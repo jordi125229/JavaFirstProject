@@ -49,7 +49,7 @@ public class BookingService {
         return b;
     }
 
-    Booking book(User u, Resource r, LocalDateTime start, int durationTime) {
+    public Booking book(User u, Resource r, LocalDateTime start, int durationTime) {
         return book(u, r, start, start.plusMinutes(durationTime));
     }
 
