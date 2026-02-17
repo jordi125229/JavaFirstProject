@@ -9,15 +9,16 @@ import java.util.Optional;
 
 public class InMemoryResourceRepository implements ResourceRepository {
     private List<Resource> resources;
-    private int resourcesCount = 0;
+    private int resourcesCount;
 
     public InMemoryResourceRepository() {
         this.resources = new ArrayList<>();
+        this.resourcesCount = 0;
     }
 
     @Override
-    public void add(Resource r) {
-        resources.add(r);
+    public void add(Resource resource) {
+        resources.add(resource);
         resourcesCount++;
     }
 

@@ -8,15 +8,16 @@ import java.util.Optional;
 
 public class InMemoryUserRepository implements UserRepository {
     private List<User> users;
-    private int userCount = 0;
+    private int userCount;
 
     public InMemoryUserRepository() {
         this.users = new ArrayList<>();
+        this.userCount = 0;
     }
 
     @Override
-    public void add(User u) {
-        users.add(u);
+    public void add(User user) {
+        users.add(user);
         userCount++;
     }
 

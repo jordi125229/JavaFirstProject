@@ -36,67 +36,55 @@ public class BookingService {
         this.pricingPolicy = pricingPolicy;
     }
 
-    public Booking book(User u, Resource r, LocalDateTime s, LocalDateTime e) {
-        if (!validation(r, s, e)) {
+    public Booking book(User user, Resource resource, LocalDateTime start, LocalDateTime end) {
+        if (!validate(resource, start, end)) {
             throw new IllegalArgumentException("Resource isn't available in this time");
         }
-        Booking b = new Booking(u, r, s, e);
-        String date = s.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        Money price = getPricingPolicy(b);
-        b.setCalculatedPrice(price);
-        b.setId("BK-<" + date + counterCreation() + ">");
-        b.setStatus(BookingStatus.PENDING);
-        return b;
+        Booking booking = new Booking(user, resource, start, end);
+        String date = start.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        Money price = getPricingPolicy(booking);
+        booking.setCalculatedPrice(price);
+        booking.setId("BK-<" + date + counterCreation() + ">");
+        booking.setStatus(BookingStatus.PENDING);
+        booking.setPayment(PaymentStatus.INITIATED);
+        return booking;
     }
 
-    public Booking book(User u, Resource r, LocalDateTime start, int durationTime) {
-        return book(u, r, start, start.plusMinutes(durationTime));
+    public Booking book(User user, Resource resource, LocalDateTime start, int durationTime) {
+        return book(user, resource, start, start.plusMinutes(durationTime));
     }
 
-    private Money getPricingPolicy(Booking b) {
+    private Money getPricingPolicy(Booking booking) {
         PricingPolicy pricingPolicy;
-        LocalTime firstHappyHour = LocalTime.of(14, 0);
-        LocalTime lastHappyHour = LocalTime.of(16, 0);
-        LocalTime bookingTime = b.getStart().toLocalTime();
+        LocalTime bookingTime = booking.getStart().toLocalTime();
+        pricingPolicy = checkingPricingPolicy(bookingTime);
+        return pricingPolicy.price(booking);
+    }
 
-        if (!bookingTime.isBefore(firstHappyHour)
-                && bookingTime.isBefore(lastHappyHour)) {
+    private PricingPolicy checkingPricingPolicy(LocalTime bookingTime) {
+        PricingPolicy pricingPolicy;
+        if (isHappyHour(bookingTime)) {
             pricingPolicy = new HappyHoursPricing();
         } else {
             pricingPolicy = new StandardPricing();
         }
-        return pricingPolicy.price(b);
+        return pricingPolicy;
     }
 
-    public boolean validation(Resource r, LocalDateTime s, LocalDateTime e) {
-        List<Booking> bookings = bookingRepository.findByResource(r);
+    private boolean isHappyHour(LocalTime time) {
+        LocalTime start = LocalTime.of(14, 0);
+        LocalTime end = LocalTime.of(16, 0);
+        return !time.isBefore(start) && time.isBefore(end);
+    }
+
+    public boolean validate(Resource resource, LocalDateTime start, LocalDateTime end) {
+        List<Booking> bookings = bookingRepository.findByResource(resource);
+        return checkingAvailability(start, end, bookings);
+    }
+
+    private boolean checkingAvailability(LocalDateTime start, LocalDateTime end, List<Booking> bookings) {
         return bookings.stream()
-                .noneMatch(b ->
-                        s.isBefore(b.getEnd()) &&
-                                e.isAfter(b.getStart())
-                );
-    }
-
-    public void confirm(Booking b) {
-        if (b.getStatus() == BookingStatus.PENDING) {
-            b.setStatus(BookingStatus.CONFIRMED);
-        }
-    }
-
-    public void complete(Booking b) {
-        if (b.getStatus() == BookingStatus.CONFIRMED) {
-            b.setStatus(BookingStatus.COMPLETED);
-        }
-    }
-
-    public void cancel(Booking b) {
-        if (b.getStatus() == BookingStatus.PENDING || b.getStatus() == BookingStatus.CONFIRMED) {
-            b.setStatus(BookingStatus.CANCELLED);
-        }
-    }
-
-    public List<Booking> bookings() {
-        return bookingRepository.findAll();
+                .noneMatch(b -> start.isBefore(b.getEnd()) && end.isAfter(b.getStart()));
     }
 
     public static int counterCreation() {

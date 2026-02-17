@@ -39,7 +39,7 @@ public class Cli {
         this.dataReader = new DataReader();
         this.consolePrinter = new ConsolePrinter();
         this.userRepository = new InMemoryUserRepository();
-        this.bookingRepository = new InMemoryBookingRepository(); // tworzymy pola i konstruktor, nie przypisujemy wartosci do tych pol, robimy to w konstuktorze
+        this.bookingRepository = new InMemoryBookingRepository();
         this.resourceRepository = new InMemoryResourceRepository();
         this.pricingPolicy = new StandardPricing();
         this.bookingService = new BookingService(
@@ -56,7 +56,7 @@ public class Cli {
         Options option;
         do {
             Options.printOptions();
-            int insert = dataReader.getInt();
+            int insert = dataReader.getAndReturnInt();
             option = Options.fromNumber(insert);
 
             switch (option) {
@@ -125,7 +125,7 @@ public class Cli {
         consolePrinter.printLine("Choose option: ");
         consolePrinter.printLine("1 - Insert ending date: ");
         consolePrinter.printLine("2 - Insert duration time (minutes): ");
-        int oneOfOption = dataReader.getInt();
+        int oneOfOption = dataReader.getAndReturnInt();
         Booking booking;
         if (oneOfOption == 1) {
             LocalDateTime end = dataReader.readEndDate();
@@ -134,7 +134,7 @@ public class Cli {
             }
             booking = bookingService.book(byEmail.get(), byName.get(), start, end);
         } else {
-            int durationTime = dataReader.getInt();
+            int durationTime = dataReader.getAndReturnInt();
             if (durationTime <= 0) {
                 throw new IllegalArgumentException();
             }
@@ -172,19 +172,19 @@ public class Cli {
 
     public void completeBooking() {
         Booking booking = getBooking();
-        bookingService.complete(booking);
+        booking.complete();
         consolePrinter.printLine(booking.toString());
     }
 
     public void cancelBooking() {
         Booking booking = getBooking();
-        bookingService.cancel(booking);
+        booking.cancel();
         consolePrinter.printLine(booking.toString());
     }
 
     public void confirmBooking() {
         Booking booking = getBooking();
-        bookingService.confirm(booking);
+        booking.confirm();
         consolePrinter.printLine(booking.toString());
     }
 

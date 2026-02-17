@@ -19,7 +19,7 @@ public class ConsolePrinter {
 
     public void printResources(List<Resource> resourceList) {
         for (Resource resource : resourceList) {
-            printLine(resource.describe());
+            printLine(resource.toString());
         }
     }
 

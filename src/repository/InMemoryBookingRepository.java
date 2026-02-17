@@ -10,15 +10,16 @@ import java.util.Optional;
 
 public class InMemoryBookingRepository implements BookingRepository {
     private List<Booking> bookings;
-    private int bookingsCount = 0;
+    private int bookingsCount;
 
     public InMemoryBookingRepository() {
         this.bookings = new ArrayList<>();
+        this.bookingsCount = 0;
     }
 
     @Override
-    public void add(Booking b) {
-        bookings.add(b);
+    public void add(Booking booking) {
+        bookings.add(booking);
         bookingsCount++;
     }
 
@@ -41,9 +42,9 @@ public class InMemoryBookingRepository implements BookingRepository {
     }
 
     @Override
-    public List<Booking> findByResource(Resource r) {
+    public List<Booking> findByResource(Resource resource) {
         return bookings.stream()
-                .filter(b -> b.getResource().equals(r))
+                .filter(b -> b.getResource().equals(resource))
                 .toList();
     }
 }

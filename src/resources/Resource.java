@@ -15,8 +15,6 @@ public abstract class Resource {
 
     protected abstract Money baseRatePerHour();
 
-    public abstract String describe();
-
     public Money hourlyRate() {
         if (customHourlyRate != null) {
             return customHourlyRate;

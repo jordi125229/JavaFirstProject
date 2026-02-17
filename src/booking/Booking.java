@@ -24,19 +24,6 @@ public class Booking {
     private Money calculatedPrice;
     private Payment payment;
 
-//    public Booking(String id, User user, Resource resource, LocalDateTime start,
-//                   LocalDateTime end,
-//                   BookingStatus status, Money calculatedPrice, Payment payment) {
-//        this.id = id;
-//        this.user = user;
-//        this.resource = resource;
-//        this.start = start;
-//        this.end = end;
-//        this.status = status;
-//        this.calculatedPrice = calculatedPrice;
-//        this.payment = payment;
-//    }
-
     public Booking(User user, Resource resource, LocalDateTime s, LocalDateTime e) {
         this.user = user;
         this.resource = resource;
@@ -44,21 +31,8 @@ public class Booking {
         this.end = e;
     }
 
-    public int durationMinutes(){
+    public int durationMinutes() {
         return (int) Duration.between(start, end).toMinutes();
-    }
-
-     Money calculatePrice(){
-        PricingPolicy pricingPolicy;
-        LocalTime firstHappyHour = LocalTime.of(14, 00);
-        LocalTime lastHappyHour = LocalTime.of(16, 00);
-        LocalTime bookingTime = start.toLocalTime();
-        if (bookingTime.isAfter(firstHappyHour) && bookingTime.isBefore(lastHappyHour)) {
-            pricingPolicy = new HappyHoursPricing();
-        } else {
-            pricingPolicy = new StandardPricing();
-        }
-         return pricingPolicy.price(this);
     }
 
     @Override
@@ -70,7 +44,7 @@ public class Booking {
                 ", end: " + end +
                 ", status- " + status +
                 ", calculatedPrice: " + calculatedPrice +
-                ", payment=" + payment;
+                ", payment status" + payment;
     }
 
     public String getId() {
@@ -138,5 +112,29 @@ public class Booking {
     }
 
     public void setPayment(PaymentStatus paymentStatus) {
+    }
+
+    public void confirm() {
+        if (status == BookingStatus.PENDING) {
+            status = BookingStatus.CONFIRMED;
+        } else {
+            System.out.println("Changing of booking status isn't possible!");
+        }
+    }
+
+    public void complete() {
+        if (status == BookingStatus.CONFIRMED) {
+            status = BookingStatus.COMPLETED;
+        } else {
+            System.out.println("Changing of booking status isn't possible!");
+        }
+    }
+
+    public void cancel() {
+        if (status == BookingStatus.PENDING || status == BookingStatus.CONFIRMED) {
+            status = BookingStatus.CANCELLED;
+        } else {
+            System.out.println("Changing of booking status isn't possible!");
+        }
     }
 }
